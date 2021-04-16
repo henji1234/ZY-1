@@ -3,7 +3,7 @@ name: 西梅
 on:
   workflow_dispatch:
   schedule:
-     - cron: '15,40 1,4,8,10,12 * * *'
+     - cron: '15,40 1,4,7,9,11 * * *'
   watch:
     types: started
 jobs:
