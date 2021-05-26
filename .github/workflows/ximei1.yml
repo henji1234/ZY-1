@@ -1,32 +1,32 @@
 name: 西梅
 
+
 on:
   workflow_dispatch:
   schedule:
-     - cron: '15,40 4-12 * * *'
+     - cron: '0 */1 * * *'
   watch:
     types: started
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: github.event.repository.owner.id == github.event.sender.id
+    if: github.event.repository.owner.id == github.event.sender.id 
     env:
         XIMEI_HD: ${{ secrets.XIMEI_HD }}
         XIMEI_URL: ${{ secrets.XIMEI_URL }}
     steps:
-      - uses: actions/checkout@v1
-      - name: Use Node.js 14.x
+      - name: Checkout
+        uses: actions/checkout@v1
+        
+      - name: Use Node.js 12.x
         uses: actions/setup-node@v1
         with:
-          node-version: 14.x
+          node-version: 12.x
       - name: npm install
         run: |
-      
-             npm install
+          npm install
       - name: '运行 【西梅】'
-        if: env.XIMEI_HD
         run: |
-   
           node Task/ximei.js
         env:
           PUSH_KEY: ${{ secrets.PUSH_KEY }}
@@ -35,4 +35,4 @@ jobs:
           TG_USER_ID: ${{ secrets.TG_USER_ID }}
           BARK_SOUND: ${{ secrets.BARK_SOUND }}
           DD_BOT_TOKEN: ${{ secrets.DD_BOT_TOKEN }}
-          DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET }}
+          DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET }} 
